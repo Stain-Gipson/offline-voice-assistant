@@ -1,0 +1,6 @@
+speech-to-speech
+websockets>=13
+sounddevice
+numpy
+pyyaml
+pytest

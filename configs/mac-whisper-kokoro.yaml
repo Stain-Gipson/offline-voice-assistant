@@ -1,0 +1,18 @@
+# Same LLM as mac.yaml, different ears and voice: Whisper (MLX Audio) STT and Kokoro-82M TTS.
+# Kokoro needs Python 3.11 or 3.12 on macOS: pip install "speech-to-speech[kokoro]"
+# Run: speech-to-speech serve -f configs/mac-whisper-kokoro.yaml
+schema_version: 1
+blocks:
+  vad: {kind: vad, backend: silero}
+  stt: {kind: stt, backend: mlx-audio-whisper}
+  llm:
+    kind: llm
+    backend: mlx-lm
+    settings:
+      model_name: mlx-community/Qwen3.5-4B-4bit
+  tts: {kind: tts, backend: kokoro}
+pipelines:
+  mac-whisper-kokoro:
+    options:
+      mac_optimal_settings: true
+    stages: {vad: vad, stt: stt, llm: llm, tts: tts}
